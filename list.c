@@ -13,6 +13,22 @@ void initialize(struct node **_head)
 
 void finalize(struct node **_head)
 {
+	/* If the list is empty */
+	if (is_empty(*_head)) {
+		free(*_head);
+
+		return;
+	}
+
+	struct node *temp = (*_head)->right;
+
+	while (temp->data) {
+		struct node *del = temp;
+		temp = temp->right;
+
+		free(del);
+	}
+
 	free(*_head);
 
 	return;
@@ -79,35 +95,37 @@ void add_list_tail(struct node *_head, char *_item)
 }
 
 
-char *del_list_head(struct node *_head)
+void del_list_head(struct node *_head, char *_buffer)
 {
 	assert(!is_empty(_head));
 
 	struct node *del = _head->right;
-	char *del_item = (char*)malloc(sizeof(char) * strlen(del->data));
 
-	strcpy(del_item, del->data);
+	strcpy(_buffer, del->data);
 
 	_head->right = del->right;
 	del->right->left = _head;
 
-	return del_item;
+	free(del);
+
+	return;
 }
 
 
-char *del_list_tail(struct node *_head)
+void del_list_tail(struct node *_head, char *_buffer)
 {
 	assert(!is_empty(_head));
 
 	struct node *del = _head->left;
-	char *del_item = (char*)malloc(sizeof(char) * strlen(del->data));
 
-	strcpy(del_item, del->data);
+	strcpy(_buffer, del->data);
 
 	_head->left = del->left;
 	del->left->right = _head;
 
-	return del_item;
+	free(del);
+
+	return;
 }
 
 

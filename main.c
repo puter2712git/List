@@ -3,6 +3,7 @@
 int main()
 {
 	struct node *head;
+	char buffer[MAX_BUFFER_SIZE];
 
 	initialize(&head);
 
@@ -16,13 +17,15 @@ int main()
 
 	dump_list(head);
 
-	del_list_head(head);
+	del_list_head(head, buffer);
 
 	dump_list(head);
 
-	del_list_tail(head);
+	del_list_tail(head, buffer);
 
 	dump_list(head);
+
+	finalize(&head);
 
 	return 0;
 }

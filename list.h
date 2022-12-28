@@ -7,6 +7,8 @@
 #include <stdbool.h>
 #include <assert.h>
 
+#define MAX_BUFFER_SIZE 100
+
 /* Node data structure of list which store string */
 struct node {
 	char *data;
@@ -36,11 +38,11 @@ void add_list_tail(struct node *_head, char *_item);
 
 
 /* Delete the data of the head of the list */
-char *del_list_head(struct node *_head);
+void del_list_head(struct node *_head, char *_buffer);
 
 
 /* Delete the data of the tail of the list */
-char *del_list_tail(struct node *_tail);
+void del_list_tail(struct node *_tail, char *_buffer);
 
 
 /* Show data of the list */
